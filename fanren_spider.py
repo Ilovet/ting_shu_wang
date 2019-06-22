@@ -1,12 +1,10 @@
-
+import requests
 from selenium import webdriver
 
 def get_content(url,name):
-    try:
-        content=requests.get(url).content
-    except:
-        print('音频资源失效')
-        return  
+    content=requests.get(url).content
+    if content==None:
+        return
     with open(name+'.mp3','wb') as m:
         m.write(content)
         m.close()
@@ -44,11 +42,13 @@ def main():
         try:    
             get_content(audio.get_attribute('src'),str(page))
         except:
+            print('音频资源失效')
             with open('fail.txt','a+') as n:
                 n.write(url+'\n')
                 n.close()
             browser.close()
             return
+        browser.close()
 if __name__=='__main__':
     main()
 
