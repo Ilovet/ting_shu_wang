@@ -20,7 +20,7 @@ def main():
                 n.close()
             print('失效网址：'+url)
             browser.close()
-            return
+            continue
         try:
             browser.switch_to.frame('play')
         except:
@@ -29,7 +29,7 @@ def main():
                 n.write(url+'\n')
                 n.close()
             browser.close()
-            return
+            continue
         try:
             audio=browser.find_element_by_xpath('//*[@id="jp_audio_0"]')
         except:
@@ -38,7 +38,7 @@ def main():
                 n.write(url+'\n')
                 n.close()
             browser.close()
-            return
+            continue
         try:    
             get_content(audio.get_attribute('src'),str(page))
         except:
@@ -47,7 +47,7 @@ def main():
                 n.write(url+'\n')
                 n.close()
             browser.close()
-            return
+            continue
         browser.close()
 if __name__=='__main__':
     main()
